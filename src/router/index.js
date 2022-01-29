@@ -1,31 +1,104 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
+import Layouts from "../views/layouts/Layouts"
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/About.vue')
-    }
-  }
+    {
+        path: '/login',
+        name: 'Login',
+        component: function () {
+            return import(/* webpackChunkName: "login" */ '../views/Login.vue')
+        }
+    },
+    {
+        path: '/registration',
+        name: 'Registration',
+        component: function () {
+            return import(/* webpackChunkName: "registration" */ '../views/Registration.vue')
+        }
+    },
+    {
+        path: '',
+        component: Layouts,
+        meta: {
+            requiresAuth: true
+        },
+        children: [
+            {
+                path: '',
+                redirect: '/home'
+            },
+            {
+                path: '/home',
+                name: 'home',
+                component: function () {
+                    return import(/* webpackChunkName: "dashboard" */ '../views/Home')
+                }
+            },
+            {
+                path: '/customers',
+                name: 'Customers',
+                component: function () {
+                    return import(/* webpackChunkName: "customers" */ '../views/Customers.vue')
+                }
+            },
+            {
+                path: '/products',
+                name: 'Product',
+                component: function () {
+                    return import(/* webpackChunkName: "products" */ '../views/Product.vue')
+                }
+            },
+            {
+                path: '/slab',
+                name: 'Slab',
+                component: function () {
+                    return import(/* webpackChunkName: "slab" */ '../views/Slab.vue')
+                }
+            },
+            {
+                path: '/rate-setting',
+                name: 'RateSetting',
+                component: function () {
+                    return import(/* webpackChunkName: "rate-setting" */ '../views/RateSetting.vue')
+                }
+            },
+            {
+                path: '/point-setting',
+                name: 'PointSetting',
+                component: function () {
+                    return import(/* webpackChunkName: "point-setting" */ '../views/PointSetting.vue')
+                }
+            },
+            {
+                path: '/profile',
+                name: 'Profile',
+                component: function () {
+                    return import(/* webpackChunkName: "profile" */ '../views/Profile.vue')
+                }
+            },
+        ]
+    },
+    // Not Found Page
+    {
+        path: "*",
+        name: "NotFound",
+        component: function () {
+            return import(/* webpackChunkName: "about" */ '../views/PageNotFound')
+        }
+    },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    scrollBehavior(to, from, savedPosition) {
+        return {x: 0, y: 0}
+    },
+    routes
 })
 
 export default router
