@@ -29,7 +29,7 @@ const routes = [
         children: [
             {
                 path: '',
-                redirect: '/home'
+                redirect: '/products'
             },
             {
                 path: '/home',
@@ -50,6 +50,34 @@ const routes = [
                 name: 'Product',
                 component: function () {
                     return import(/* webpackChunkName: "products" */ '../views/Product.vue')
+                }
+            },
+            {
+                path: '/product/:id',
+                name: 'ProductDetails',
+                component: function () {
+                    return import(/* webpackChunkName: "product-details" */ '../views/SingleProduct.vue')
+                }
+            },
+            {
+                path: '/all-orders',
+                name: 'AllOrderDetails',
+                component: function () {
+                    return import(/* webpackChunkName: "all-order-details" */ '../views/Orders.vue')
+                }
+            },
+            {
+                path: '/orders',
+                name: 'Orders',
+                component: function () {
+                    return import(/* webpackChunkName: "orders" */ '../views/UserOrders.vue')
+                }
+            },
+            {
+                path: '/order/:id',
+                name: 'OrderDetails',
+                component: function () {
+                    return import(/* webpackChunkName: "order-details" */ '../views/OrderDetails.vue')
                 }
             },
             {

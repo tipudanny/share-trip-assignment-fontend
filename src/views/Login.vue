@@ -40,7 +40,7 @@ export default {
             this.btnDisabled = true;
             this.$store.dispatch("login", {vm: this, fields: this.userInfo})
                 .then(response => {
-                    this.$router.push('/home')
+                    this.$router.push('/products')
                 })
                 .catch(errors => {
                 

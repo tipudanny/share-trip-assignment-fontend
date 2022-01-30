@@ -15,7 +15,7 @@ router.beforeEach((to, from, next) => {
             next('/login');
         }
     } else if (to.path === '/login' && store.getters['isLoggedIn']) {
-        next('/home');
+        next('/products');
     } else {
         next();
     }

@@ -1,11 +1,7 @@
 <template>
     <div class="mt-5">
         <div class="alert alert-primary" role="alert">
-            <h5>All Customers Orders</h5>
-        </div>
-        <br>
-        <div v-if="isError" class="alert alert-danger" role="alert">
-            Order Data fetch failed.
+            <h5>Your Orders</h5>
         </div>
         <br>
         <div class="card">
@@ -53,29 +49,23 @@
 import Api from "../api/Api";
 
 export default {
-    name: "Orders",
+    name: "UserOrders",
     mounted() {
         this.getAllOrders()
     },
     data(){
         return{
             orders:[],
-            loading:false,
-            isError:false
+            loading:false
         }
     },
     methods:{
         getAllOrders(){
-            Api.get('/admin/orders')
+            Api.get('/orders')
                 .then(response =>{
+                    this.loading=true
                     this.orders = response.data.data
                 })
-            .catch(error=>{
-                this.isError=true
-            })
-            .finally(()=>{
-                this.loading=true
-            })
         }
     }
 }

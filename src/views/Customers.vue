@@ -1,12 +1,15 @@
 <template>
     <div class="mt-5">
-        <div class="card">
-            <div class="card-body">
-                <h5>Customer Table</h5>
-            </div>
+        <div class="alert alert-primary" role="alert">
+            <h5>All Customers</h5>
         </div>
         <br>
-        <div class="card">
+        <div v-if="!loading" class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div v-else class="card">
             <div class="card-body">
                 <table class="table">
                     <thead>
@@ -44,13 +47,15 @@ export default {
     },
     data(){
         return{
-            customers:[]
+            customers:[],
+            loading:false
         }
     },
     methods:{
         getAllCustomers(){
             Api.get('/admin/customers')
                 .then(response =>{
+                    this.loading = true
                     this.customers = response.data.data
                 })
         }
