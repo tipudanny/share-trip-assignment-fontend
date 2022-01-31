@@ -2,7 +2,7 @@
     <div class="mt-5">
         <div class="alert alert-primary" role="alert">
             <div class="d-flex justify-content-between">
-                <h5>Your Orders</h5>
+                <h5>All Slab Package</h5>
                 <button
                     class="btn btn-sm btn-primary"
                     @click="addSlab()"
@@ -101,7 +101,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                        <button type="button" @click="confirmDelete()" class="btn btn-sm btn-danger">Delete</button>
                     </div>
                 </div>
             </div>
@@ -173,7 +173,14 @@ export default {
             
         },
         deleteSlab(id){
-        
+            this.editSlab(id);
+        },
+        confirmDelete(){
+            Api.delete(`/admin/slab/${this.slab.id}`)
+                .then(response => {
+                    this.$refs.Close.click();
+                    this.getAllSlab()
+                })
         }
     }
 }

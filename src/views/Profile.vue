@@ -1,7 +1,8 @@
 <template>
     <div>
         <div v-if="loading" class="alert alert-primary" role="alert">
-            <h5>Rewarded: {{ profile.reward_points.points }} points</h5>
+            <h5>Rewarded: {{ profile.reward_points  ? profile.reward_points.points : 0 }} points</h5>
+            <h6 class="text-dark"> Your Slab : <span class="text-danger"> {{ profile.hasOwnProperty('slab') ? profile.slab.toUpperCase() : '--' }} </span> </h6>
         </div>
         <div class="card mb-3" style="max-width: 740px;">
             <div v-if="!loading" class="d-flex justify-content-center">

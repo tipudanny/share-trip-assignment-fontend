@@ -28,7 +28,8 @@
                         <td>{{customer.email}}</td>
                         <td v-if="customer.reward_points">{{customer.reward_points.points}}</td>
                         <td v-else>0.00</td>
-                        <td></td>
+                        <td v-if="customer.hasOwnProperty('slab')"> {{ customer.slab}}</td>
+                        <td v-else>--</td>
                     </tr>
                     </tbody>
                 </table>
