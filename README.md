@@ -1,5 +1,9 @@
 # reward-system
 
+## Environment setup
+```
+copy .env.local.copy and rename to .env.local and setup your api endpoint.
+```
 ## Project setup
 ```
 npm install
